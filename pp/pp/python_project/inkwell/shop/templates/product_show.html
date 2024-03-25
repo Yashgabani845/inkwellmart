@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Products</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add your custom CSS styling here */
+        .product-card {
+            margin: 10px;
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .product-details {
+            padding: 10px;
+        }
+        .buy-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .buy-button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div  style ="margin:0">
+    <h2 class="mt-4">All Products</h2>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 product-card">
+            <div class="card">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top product-image">
+                <div class="card-body product-details">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                    <p class="card-text"><strong>Owner:</strong> {{ product.owner }}</p>
+                    <a href="{% url 'product_details' product.name %}" class="btn buy-button">Buy</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="mt-4">No products available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

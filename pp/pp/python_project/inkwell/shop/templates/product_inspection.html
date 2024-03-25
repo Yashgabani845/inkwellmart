@@ -1,0 +1,79 @@
+<!-- product_inspection.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inspection</title>
+    <!-- Add your CSS styles here -->
+    <style>
+        /* Add your CSS styling for the product inspection page */
+        .product-details {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .product-info p {
+            margin-bottom: 10px;
+        }
+        .buy-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="product-details">
+    <h2>{{ product.name }}</h2>
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+    <div class="product-info">
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+        <p><strong>Category:</strong> {{ product.category }}</p>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+        <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+        <p><strong>Owner:</strong> {{ product.owner }}</p>
+        <a href="" class="buy-button">Buy Now</a>
+    </div>
+</div>
+
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-3 product-card">
+        <div class="card">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top product-image">
+            <div class="card-body product-details">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                <p class="card-text"><strong>Owner:</strong> {{ product.owner }}</p>
+                <a href="{% url 'product_details' product.name %}" class="btn buy-button">Buy</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    
+    {% endfor %}
+</div>
+
+
+
+</body>
+</html>

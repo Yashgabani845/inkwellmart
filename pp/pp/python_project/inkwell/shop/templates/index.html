@@ -1,0 +1,371 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+</head>
+
+<body>
+    <div class="all">
+        <div class="navigation">
+            <ul>
+                <li style="padding-right: 0%;margin-left: 30px;"><a href="#home"><img
+                            src="{% static 'images/Screenshot_2023-12-24_135300-removebg-preview.png' %}"></a></li>
+                <li class="search-box">
+                    <div class="search">
+                        <form action="search_owner" method="get">
+                            <button id="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg></button>
+                                <form>
+                                    <input type="text" placeholder="Search..." id="search-input">
+                                    <div id="suggestions"></div>
+                                </form>
+
+                        </form>
+                    </div>
+                </li>
+                <li>
+                   <a href="/logout" style="padding: 0px"><button class="button-47" role="button" >Logout<span style="width: 5px;"></span><svg
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="currentColor"
+                            class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+                            <path fill-rule="evenodd"
+                                d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg></button></a> 
+                </li>
+                <li><button class="button-47">Cart <span style="width: 5px;"></span> <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-cart-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
+                            <path
+                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                        </svg></button></li>
+                <li><button class="button-47">Order <span style="width: 5px;"></span><svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0m-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
+                        </svg></button></li>
+                <li><button class="button-47">Wishlist <span style="width: 5px;"></span> <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-bag-heart" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1M8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                        </svg></span></button></li>
+            </ul>
+        </div>
+
+        <div class="options">
+
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{% static 'images/sta.png' %}" width="100%" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Stationary</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{% static 'images/books.png' %}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Books</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{% static 'images/stationary.png' %}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Publications</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{% static 'images/brand.png' %}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Brand deals</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{% static 'images/sale.png' %}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span> Big Sales</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{% static 'images/bestseller.png' %}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Best Sellers</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{% static 'images/wholsesale-removebg-preview.png'%}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Wholesale</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{%static 'images/art-removebg-preview.png'%}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Art & Crafts</span>
+                    </center>
+                </div>
+            </div>
+            <div class="option">
+                <div class="optionimg">
+                    <img src="{%static 'images/office-removebg-preview.png'%}" alt="">
+                </div>
+                <div class="optionspan">
+                    <center>
+                        <span>Office Things</span>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+
+        <center>
+            <div class="carousel">
+                <div class="slides">
+                    <img src="{%static 'mega.png' %}" alt="Slide 1">
+                    <img src="static/caro.png" alt="Slide 2">
+                    <img src="static/mega.png" alt="Slide 3">
+                    <img src="static/caro.png" alt="Slide 4">
+                    <img src="static/mega.png" alt="Slide 5">
+                </div>
+            </div>
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+        </center>
+        <div class="catogary">
+
+            
+            <a href="cat/pens"><div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/pens.png'%}" alt="">
+                </div>
+                <center><span>Pens</span></center>
+
+            </div></a>
+            <div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/pencils.png'%}" alt="">
+                </div>
+                <center><span>Pencils</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/highlighters.png'%}" alt="">
+                </div>
+                <center><span>Highlighters</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/files.png'%}" alt="">
+                </div>
+                <center><span>Files</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/staplers.png'%}" alt="">
+                </div>
+                <center><span>Staplers</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/stickeyn.png'%}" alt="">
+                </div>
+                <center><span>Sticky Notes</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/waterbottle.png'%}" alt="">
+                </div>
+                <center><span>Waterbottles</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="{%static 'images/calculator.png'%}" alt="">
+                </div>
+                <center><span>Calculators</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="static/images/sharpners.png" alt="">
+                </div>
+                <center><span>Sharpners</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="static/images/notebook.png" alt="">
+                </div>
+                <center><span>Notebooks</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="static/images/lights.png" alt="">
+                </div>
+                <center><span>Study Lights</span></center>
+
+            </div>
+            <div class="cat">
+                <div class="catimg">
+                <img src="static/images/books.png" alt="">
+                </div>
+                <center><span>Books</span></center>
+
+            </div>
+            
+        </div>
+       <div class="underprice">
+        <div class="undersec"><img src="{%static 'images/under99b.png'%}" alt=""></div>
+        <div class="undersec"><img src="{%static 'images/under99b.png'%}" alt=""></div>
+        <div class="undersec"><img src="{%static 'images/under99b.png'%}" alt=""></div>
+       </div>
+
+<div class="mostpopular">
+    <span style="font-weight:700 ; font-family: Arial, Helvetica, sans-serif;font-size: 25px; margin-left: 50px;">Most Popular</span>
+<br>    
+    <div class="most">
+        <img src="{%static 'images/books.png'%}"alt="photo">  
+        <center><span>title</span></center>
+    </div>
+    <div class="most">
+        <img src="{%static 'images/books.png'%}"alt="photo">
+        <center><span>title</span></center>
+    </div> 
+    <div class="most">
+        <img src="{%static 'images/books.png'%}"alt="photo">
+        <center><span>title</span></center>
+    </div>
+    <div class="most">
+        <img src="{%static 'images/books.png'%}"alt="photo">
+        <center><span>title</span></center>
+    </div>
+    <div class="most">
+        <img src="{%static 'images/books.png'%}"alt="photo">
+        <center><span>title</span></center>
+    </div>
+</div>
+
+<footer class="footer">
+   <div class="fdiv">
+    <ul>
+        <li>About us</li>
+        <li>Contact us</li>
+        <li>Refund policy</li>
+        <li>Privacy policy</li>
+        <li>Security</li>
+    </ul>
+   </div>
+   <div class="fdiv"></div>
+   <div class="fdiv"></div>
+   <div class="fdiv"></div>
+   <hr>
+</footer>
+
+
+
+
+
+    </div>
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const suggestionsDiv = document.getElementById('suggestions');
+       
+    
+        // Function to show suggestions
+        function showSuggestions() {
+            suggestionsDiv.style.display = 'block';
+        }
+    
+        // Function to hide suggestions
+        function hideSuggestions() {
+            suggestionsDiv.style.display = 'none';
+        }
+    
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value;
+            fetch(`/product-suggestions/?search=${searchTerm}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestionsDiv.innerHTML = '';
+                    data.suggestions.forEach(suggestion => {
+                        const suggestionItem = document.createElement('div');
+                        suggestionItem.textContent = suggestion;
+                        suggestionItem.classList.add('suggestion-item');  
+                        suggestionsDiv.appendChild(suggestionItem);
+                        suggestionItem.addEventListener('click', function() {
+                            const product_name = suggestion;
+                            window.location.href = `/product_details/${product_name}/`;
+                        });
+                    });
+                });
+                showSuggestions();
+        });
+        document.body.addEventListener('click', function(event) {
+            const isClickInsideSearch = searchInput.contains(event.target);
+            const isClickInsideSuggestions = suggestionsDiv.contains(event.target);
+    
+            if (!isClickInsideSearch && !isClickInsideSuggestions) {
+                hideSuggestions();
+            }
+        });
+    </script>
+    <style>  
+    
+    .suggestion-item {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .suggestion-item:hover {
+        background-color: #f0f0f0;
+    }</style>
+    <script src="static/script.js"></script>
+</body>
+
+</html>

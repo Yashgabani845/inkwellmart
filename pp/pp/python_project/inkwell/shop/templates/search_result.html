@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>Search Result</title>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .owner-name {
+            font-size: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="owner-name">
+            {% if owner_products %}
+               <b> Owner: {{ owner_products.first.owner }}</b>
+            {% else %}
+               <b> No owner found for the search term.</b>
+            {% endif %}
+        </div>
+        <br>
+        <div class="columns is-multiline">
+            {% for product in owner_products %}
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <p class="title is-4">{{ product.name }}</p>
+                        <p><strong>Price:</strong> {{ product.price }}</p>
+                        <p><strong>Category:</strong> {{ product.category }}</p>
+                        <p><strong>Description:</strong> {{ product.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <p>No products found for the owner.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
