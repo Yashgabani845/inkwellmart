@@ -35,6 +35,8 @@ urlpatterns = [
     path('product_details/<str:product_name>/', views.product_details, name='product_details'),
     path('home/cat/<str:cat_name>/',views.catname),
     path('product-suggestions/', views.product_suggestions, name='product_suggestions'),
+    path('profile/', views.profile, name='profile'),
+    path('buy_now/<str:product_name>',views.buy_now,name='buy_now')
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
