@@ -8,13 +8,14 @@ class Category(models.Model):
         return self.name
 
 
+
 class Customer(AbstractUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=100, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    
+
 
     def __str__(self):
         return self.username
@@ -22,7 +23,8 @@ class Customer(AbstractUser):
 class Owner(models.Model):
     first_name = models.CharField(max_length=100, unique=True)
     sales = models.DecimalField(max_digits=10, decimal_places=4, default=0)
-    
+    gst_no=models.CharField(max_length=100,default='')
+    ownerkey=models.CharField(max_length=100,  default='')
 
     def __str__(self):
         return self.first_name
@@ -39,8 +41,11 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Order(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order_id=models.AutoField(primary_key=True)
+    product =models.ForeignKey(Product, on_delete=models.CASCADE)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
@@ -53,9 +58,10 @@ class Order(models.Model):
 class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity_cart = models.IntegerField(default=1)
-
+    username = models.CharField(max_length=100, default='')  # Default value added
     def __str__(self):
         return f"{self.product} - {self.quantity_cart}"
+
 
 
 class Payment(models.Model):
