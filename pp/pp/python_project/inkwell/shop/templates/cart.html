@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .cart-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .product-info {
+            display: flex;
+            align-items: center;
+        }
+        .product-info img {
+            width: 80px;
+            margin-right: 20px;
+        }
+        .product-details {
+            flex-grow: 1;
+        }
+        .product-name {
+            font-weight: bold;
+        }
+        .product-quantity {
+            color: #6c757d;
+        }
+        .quantity-btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Your Cart</h1>
+        <div class="row">
+            {% for item in cart_items %}
+            <div class="col-md-6">
+                <div class="cart-item">
+                    <div class="product-info">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        <div class="product-details">
+                            <p class="product-name">{{ item.product.name }}</p>
+                            <p class="product-quantity">Quantity: {{ item.quantity_cart }}</p>
+                        </div>
+                    </div>
+                    <div class="btn-group mt-3">
+                        <a href="{% url 'increase_quantity' item.product.name %}" class="btn btn-primary quantity-btn">Increase</a>
+                        <a href="{% url 'decrease_quantity' item.product.name %}" class="btn btn-primary quantity-btn">Decrease</a>
+                        <a href="{% url 'remove_from_cart' item.product.name %}" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <h3>Total Price: &#x20B9;{{ total_price }}</h3>
+                <a href="{% url 'buy_all'  %}" class="btn btn-success">Buy All</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

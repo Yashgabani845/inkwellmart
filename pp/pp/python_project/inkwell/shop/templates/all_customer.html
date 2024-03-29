@@ -1,0 +1,35 @@
+{% extends 'admin.html' %} 
+{% block content %}
+<h1 style="text-align: center;">Customer Details</h1>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Remove Button</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ customer.username }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.first_name }}</td>
+                    <td>{{ customer.last_name }}</td>
+                    <td><div class="buttons">
+                        <a
+                          href=""
+                          class="btn btn-danger"
+                          >Remove</a
+                        >
+                      </div></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
