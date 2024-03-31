@@ -24,7 +24,7 @@ from shop import views
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('home/', views.Home),
+    path('home/', views.Home, name='home'),
     path('',views.LoginPage),
     path('login/',views.LoginPage,name='login'),
     path('signup/',views.signup,name='signup'),
@@ -52,5 +52,7 @@ urlpatterns = [
     path('all_product',views.all_product,name='all_product'),
     path('all_seller',views.all_seller,name='all_seller'),
     path('all_customer',views.all_customer,name='all_customer'),
-    
+    path('product/delete/<str:name>/', views.delete_product, name='delete_product'),
+    path('product/delete/<str:name>/', views.delete_product_owner, name='delete_product_from_owner'),
+    path('update_product/<str:product_name>', views.update_product, name='update_product')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
