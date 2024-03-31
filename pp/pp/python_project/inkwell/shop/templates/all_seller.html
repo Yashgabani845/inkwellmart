@@ -1,0 +1,29 @@
+{% extends 'admin.html' %} 
+{% block content %}
+    <h1 style="text-align: center;">Seller Details</h1>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>First Name</th>
+                <th>Sales</th>
+                <th>GST No</th>
+                <th>Owner Key</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in sellers %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ seller.first_name }}</td>
+                    <td>{{ seller.sales }}</td>
+                    <td>{{ seller.gst_no }}</td>
+                    <td>{{ seller.ownerkey }}</td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

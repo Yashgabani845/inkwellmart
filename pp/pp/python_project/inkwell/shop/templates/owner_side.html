@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>.btn-250 {
+        width: 250px;
+    }
+    .seller-stats-container {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        margin-bottom: 20px;
+      }
+      .seller-stat-box {
+        border: 1px solid #dee2e6;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .profit {
+        font-size: 20px;
+        color: green;
+        font-weight: bold;
+      }
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+        margin-left: -25px; 
+    }
+
+    .btn-container a {
+        margin: 0 25px; 
+    }
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+    }
+       
+        .card-image {
+            width: 200px; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    
+    <h1 class="text-3xl font-bold text-center mt-8 mb-4">Welcome, {{ owner_data.first_name }}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="seller-stats-container">
+                    <h4>Seller Statistics</h4>
+                    <div class="seller-stat-box">
+                        <h6>Total Sales</h6>
+                        <p>{{ total_sales }}</p>
+                    </div>
+                    <div class="seller-stat-box">
+                        <h6>Total Products Uploaded</h6>
+                        <p>{{ total_products_uploaded }}</p>
+                    </div>
+                    <div class="seller-stat-box">
+                        <h6>Total Profit</h6>
+                        <p class="profit">&#8377;{{ total_profit|default:"0" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="text-xl font-semibold text-center mb-4">Products Uploaded by You:</h2>
+    <center>
+    <div class="button-group">
+        
+        <a href="{% url 'add_product' %}" class="button">Add Product</a>
+        <a href="/home" class="button">User Side</a>
+    </div>
+</center>
+    <div class="container mx-auto flex justify-center">
+        <div class="grid grid-cols-3 gap-8">
+            {% for product in owner_products %}
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-image mb-4"> <!-- Added class for the card image -->
+                <h3 class="text-xl font-semibold mb-2">{{ product.name }}</h3>
+                <p class="text-gray-700">{{ product.description }}</p>
+                <p class="text-gray-700">Price: &#8377 {{ product.price }}</p>
+                <p class="text-gray-700">Quantity: {{ product.quantity }}</p>
+                <p class="text-gray-700">Category: {{ product.category.name }}</p>
+                <div class="flex justify-between mt-4">
+                    <a href="{% url 'update_product' product.name %}" class="bg-yellow-500 text-white py-2 px-4 rounded-lg text-center hover:bg-yellow-600 transition duration-200">Update</a>
+                    <form action="{% url 'delete_product_from_owner' product.name %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg text-center hover:bg-red-600 transition duration-200">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
