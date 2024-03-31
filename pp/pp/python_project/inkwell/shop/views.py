@@ -1,3 +1,4 @@
+from math import sumprod
 from pyexpat.errors import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -6,10 +7,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from .forms import UserRegistrationForm,OwnerRegistrationForm
 from django.http import JsonResponse
+from django.db.models import Sum
+
 from .models import Cart, Owner, Product, Category,Order,Customer
 def Home(request):
-    categories = Category.objects.first()
-    return render(request,"index.html",{'category': categories })
+    return render(request,"index.html",)
 
 
 def login_view(request):
@@ -85,8 +87,20 @@ def owner_side(request):
     
     owner_data = Owner.objects.get(first_name=owner_username)
     owner_products = Product.objects.filter(owner=owner_data)
-    return render(request, 'owner_side.html', {'owner_data': owner_data, 'owner_products': owner_products})
+    total_sales = Order.objects.filter(owner=owner_data).count()
+    total_products_uploaded = owner_products.count()
+    total_profit = 0
+    orders = Order.objects.filter(owner=owner_data)
+    for order in orders:
+        total_profit += order.product.price * order.quantity
 
+    return render(request, 'owner_side.html', {
+        'owner_data': owner_data, 
+        'owner_products': owner_products,
+        'total_sales': total_sales,
+        'total_products_uploaded': total_products_uploaded,
+        'total_profit': total_profit,
+    })
 
 def checking_owner(request):
     username = request.session.get('username')
@@ -124,7 +138,7 @@ def add_product(request):
     
         owner_data = Owner.objects.get(first_name=owner_username)
         owner_products = Product.objects.filter(owner=owner_data)
-        return render(request, 'owner_side.html', {'owner_data': owner_data, 'owner_products': owner_products})
+        return redirect("/owner_side")
 
     categories = Category.objects.all()
     return render(request, 'product.html', {'categories': categories })
@@ -300,6 +314,38 @@ def all_seller(request):
 def all_customer(request):
     customers = Customer.objects.all()
     return render(request, 'all_customer.html', {'customers': customers})
+
+def delete_product(request, name):
+    product = get_object_or_404(Product, name=name)
+    product.delete()
+    return redirect('all_product')  
+
+def delete_product_owner(request, name):
+    product = get_object_or_404(Product, name=name)
+    product.delete()
+    return redirect('owner_side')
+
+def update_product(request, product_name):
+
+    if request.method == 'POST':
+        p = Product.objects.get(name=product_name)
+        p.name = request.POST.get('name')
+        p.description = request.POST.get('description')
+        cat=Category.objects.get(name=request.POST.get('category'))
+        p.category = cat
+        p.quantity = request.POST.get('quantity')
+        p.save()
+        username=Owner.objects.get(first_name=request.session.get('username'))
+        products = Product.objects.filter(owner = username)
+        data = {
+            "products":products
+        }
+        return redirect('/owner_side') 
+    products = Product.objects.filter(name=product_name)
+    data = {
+        "products":products
+    }
+    return render(request, 'update.html', data )
     
 
 
