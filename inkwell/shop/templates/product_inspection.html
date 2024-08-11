@@ -4,273 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Inspection</title>
-    <!-- Add your CSS styles here -->
     <style>
- /* Basic Styling */
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-}
-
-.container {
-  max-width: 1200px;
-  margin-top:100px;
-  margin-left:150px;
-  padding: 15px;
-  display: flex;
-}
-@media (max-width: 940px) {
-  .container {
-    flex-direction: column;
-    margin-top: 60px;
-  }
- 
-  .left-column,
-  .right-column {
-    width: 100%;
-  }
- 
-  .left-column img {
-    width: 300px;
-    right: 0;
-    top: -65px;
-    left: initial;
-  }
-}
-.left-column img {
-  width: 250px;
-}
-.left-column img.active {
-  opacity: 1;
-}
-.product-price {
-  display: flex;
-  align-items: center;
-}
-.product-price span {
-  font-size: 26px;
-  font-weight: 300;
-  color: #43474D;
-  margin-right: 20px;
-}
-.cart-btn {
-  display: inline-block;
-  background-color: #7DC855;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  padding: 12px 30px;
-  transition: all .5s;
-}
-.cart-btn:hover {
-  background-color: #64af3d;
-}
-.cable-choose {
-  margin-bottom: 20px;
-}
-.cable-choose button {
-  border: 2px solid #E1E8EE;
-  border-radius: 6px;
-  padding: 13px 20px;
-  font-size: 14px;
-  color: #5E6977;
-  background-color: #fff;
-  cursor: pointer;
-  transition: all .5s;
-}
-.cable-choose button:hover,
-.cable-choose button:active,
-.cable-choose button:focus {
-  border: 2px solid #86939E;
-  outline: none;
-} 
-.cable-config {
-  border-bottom: 1px solid #E1E8EE;
-  margin-bottom: 20px;
-}
-.cable-config a {
-  color: #358ED7;
-  text-decoration: none;
-  font-size: 12px;
-  position: relative;
-  margin: 10px 0;
-  display: inline-block;
-}
-.cable-config a:before {
-  content: "?";
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  border: 2px solid rgba(53, 142, 215, 0.5);
-  display: inline-block;
-  text-align: center;
-  line-height: 16px;
-  opacity: 0.5;
-  margin-right: 5px;
-}
-.product-color {
-  margin-bottom: 30px;
-}
-.color-choose div {
-  display: inline-block;
-}
-.color-choose input[type="radio"] {
-  display: none;
-}
-.color-choose input[type="radio"] + label span {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  margin: -1px 4px 0 0;
-  vertical-align: middle;
-  cursor: pointer;
-  border-radius: 50%;
-  border: 2px solid #FFFFFF;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33);
-}
-.color-choose input[type="radio"]#red + label span {
-  background-color: #C91524;
-}
-.color-choose input[type="radio"]#blue + label span {
-  background-color: #314780;
-}
-.color-choose input[type="radio"]#black + label span {
-  background-color: #323232;
-}
-.color-choose input[type="radio"]:checked + label span {
-  background-image: url(images/check-icn.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.product-description {
-  border-bottom: 1px solid #E1E8EE;
-  margin-bottom: 20px;
-}
-.product-description span {
-  font-size: 12px;
-  color: #358ED7;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-.product-description h1 {
-  font-weight: 300;
-  font-size: 52px;
-  color: #43484D;
-  letter-spacing: -2px;
-}
-.product-description p {
-  font-size: 16px;
-  font-weight: 300;
-  color: #86939E;
-  line-height: 24px;
-}
-.product-description {
-  border-bottom: 1px solid #E1E8EE;
-  margin-bottom: 20px;
-  padding-bottom: 20px; /* Add padding to create space */
-}
-.product-color {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #E1E8EE; /* Add border */
-  padding-bottom: 20px; /* Add padding to create space */
-}
-.cable-config {
-  border-bottom: 1px solid #E1E8EE;
-  margin-bottom: 20px;
-  padding-bottom: 20px; /* Add padding to create space */
-}
-.product-price {
-  border-top: 1px solid #E1E8EE; /* Add border to the top */
-  padding-top: 20px; /* Add padding to create space */
-}
-
-  /* Back Button */
-  .back-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #ccc;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #333;
-}
-@import "compass/css3";
-.back-button {
-	position: absolute;
-  text-indent: -15px;
-  padding: 5px 0 5px 10px;
-  width: 53px;/* modified by label length */
-	overflow: auto;
-}
-.label {
-	display: block;
-  width: auto;
-  line-height: 26px;
-  font-size: 12px;
-  font-weight: 900;
-  font-family: helvetica, sans-serif;
-  color: #fff;
-  text-decoration: none;
-  text-align: center;
-  @include border-radius (4px);
-  background-color: rgba(239,239,239,1);
-  @include background-image (linear-gradient(top, rgba(255,255,255,1) 0%,rgba(239,239,239,1) 60%,rgba(225,223,226,1) 100%));
-  @include box-shadow(0 1px 3px #cfcfcf);
-  border: 1px solid #bcbcbc;
-  border-left: 0;
-  color: #888; 
-  text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
-	@include single-transition(color,0.1s,linear,0);
-  
-	&:before {
-    float: left;
-    margin-top: 1px;
-    margin-left: -4px;
-    display: block;
-    height: 12px;
-    width: 15px;
-    content: ' ';
-    @include skew(-35deg,0);
-	  background-color: rgba(239,239,239,1);
-    @include background-image (linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 1%,rgba(240,240,240,1) 100%));
-	  border-left: 1px solid #aaa;
-  }
-  &:after {
-    position: relative;
-    margin-top: -13px;
-    margin-bottom: 1px;
-    margin-left: -4px;
-    margin-right: auto;
-    display: block;
-    height: 12px;
-    width: 15px;
-    content: ' ';
-    @include skew(35deg,0);
-	  background-color: rgba(239,239,239,1);
-    @include background-image (linear-gradient(top, rgba(240,240,240,1) 0%,rgba(239,239,239,1) 10%,rgba(225,223,226,1) 100%));
-	  border-left: 1px solid #aaa;
-    @include box-shadow(-2px 1px 2px rgba(100,100,100,0.1));
-  }
-}
-.label:hover {
-  color: hsl(210, 100%, 40%); 
-}
-.label:active {
-  @include background-image (linear-gradient(top, rgba(230,230,230,1) 0%,rgba(239,239,239,1) 60%,rgba(225,223,226,1) 100%));
-  @include box-shadow(0 0 1px #cfcfcf,inset 0 1px 2px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.7));
-  
-  &:before {
-    @include background-image (linear-gradient(top, rgba(230,230,230,0) 0%,rgba(230,230,230,1) 1%,rgba(240,240,240,1) 100%));
-  }
-  &:after {
-    @include box-shadow(-1px 0 0 rgba(255,255,255,0.7));
-  }
-}  
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+      
+      .container {
+        max-width: 1100px;
+        margin: 80px auto;
+        padding: 20px;
+        display: flex;
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      
+      @media (max-width: 940px) {
+        .container {
+          flex-direction: column;
+          margin: 60px auto;
+          padding: 15px;
+        }
+      
+        .left-column,
+        .right-column {
+          width: 100%;
+        }
+      
+        .left-column img {
+          width: 80%;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+      
+      .left-column {
+        flex: 1;
+        padding-right: 30px;
+      }
+      
+      .left-column img {
+        width: 100%;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+      
+      .left-column img.active {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      
+      .right-column {
+        flex: 2;
+        padding-left: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      
+      .product-description {
+        margin-bottom: 30px;
+      }
+      
+      .product-description span {
+        font-size: 14px;
+        color: #358ED7;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      
+      .product-description h1 {
+        font-weight: 400;
+        font-size: 48px;
+        color: #43484D;
+        letter-spacing: -1px;
+        margin: 10px 0;
+      }
+      
+      .product-description p {
+        font-size: 16px;
+        font-weight: 300;
+        color: #86939E;
+        line-height: 1.6;
+      }
+      
+      .product-configuration {
+        margin-bottom: 30px;
+      }
+      
+      .product-color,
+      .cable-config {
+        margin-bottom: 20px;
+      }
+      
+      .product-color span,
+      .cable-config span {
+        font-size: 18px;
+        color: #43484D;
+        font-weight: 500;
+        margin-bottom: 10px;
+        display: block;
+      }
+      
+      .color-choose div {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      
+      .color-choose input[type="radio"] {
+        display: none;
+      }
+      
+      .color-choose input[type="radio"] + label span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        margin: -1px 4px 0 0;
+        vertical-align: middle;
+        cursor: pointer;
+        border-radius: 50%;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+      }
+      
+      .color-choose input[type="radio"]#red + label span {
+        background-color: #C91524;
+      }
+      
+      .color-choose input[type="radio"]#blue + label span {
+        background-color: #314780;
+      }
+      
+      .color-choose input[type="radio"]#black + label span {
+        background-color: #323232;
+      }
+      
+      .color-choose input[type="radio"]:checked + label span {
+        border-color: #358ED7;
+        background-image: url('images/check-icn.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      
+      .cable-choose {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      
+      .cable-choose button {
+        border: 2px solid #E1E8EE;
+        border-radius: 6px;
+        padding: 13px 20px;
+        font-size: 14px;
+        color: #5E6977;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all .3s;
+      }
+      
+      .cable-choose button:hover,
+      .cable-choose button:active,
+      .cable-choose button:focus {
+        border-color: #358ED7;
+        color: #358ED7;
+        outline: none;
+      }
+      
+      .cable-config a {
+        color: #358ED7;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 10px;
+        display: block;
+        transition: color 0.3s ease;
+      }
+      
+      .cable-config a:hover {
+        color: #276fbf;
+      }
+      
+      .product-price {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #E1E8EE;
+      }
+      
+      .product-price span {
+        font-size: 28px;
+        font-weight: 700;
+        color: #43474D;
+      }
+      
+      .cart-btn {
+        display: inline-block;
+        background-color: #7DC855;
+        border-radius: 6px;
+        font-size: 16px;
+        color: #FFFFFF;
+        text-decoration: none;
+        padding: 12px 30px;
+        transition: all .3s;
+        margin-right: 10px;
+      }
+      
+      .cart-btn:hover {
+        background-color: #64af3d;
+        transform: scale(1.05);
+      }
+      
+      .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: #f0f0f0;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: all .3s;
+      }
+      
+      .back-button:hover {
+        background-color: #e0e0e0;
+        color: #111;
+        transform: scale(1.05);
+      }
+      
     </style>
 </head>
 <body>
@@ -286,9 +256,10 @@ html, body {
    
     <div class="right-column">
          <div class="product-description">
-        <span>{{product.category }}</span>
+       
         <h1>{{product.name }}</h1>
-        <p>{{product.description   }}</p>
+        <span>Category: {{product.category }}</span>
+        <p>description:{{product.description   }}</p>
       </div>
          <div class="product-configuration">
            <div class="product-color">
