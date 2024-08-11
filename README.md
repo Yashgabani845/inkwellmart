@@ -2,7 +2,7 @@
 
 # InkwellMart
 
-InkwellMart is an e-commerce web application built with Django, allowing users to browse, search, and purchase various products online. The platform provides a seamless shopping experience with a user-friendly interface and secure payment processing.
+InkwellMart is an e-commerce for students web application built with Django, allowing users to browse, search, and purchase various products online. The platform provides a seamless shopping experience with a user-friendly interface and secure payment processing.
 
 
 
